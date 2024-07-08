@@ -8,7 +8,7 @@ const EditEmployee = () => {
   const [formData, setFormData] = useState({
     name: "",
     department: "",
-    isactive: "",
+    isactive: null,
     employementtype: "",
   });
 
