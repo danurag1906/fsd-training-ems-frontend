@@ -77,87 +77,89 @@ const Home = () => {
       <Navbar />
       {loading && <div className="text-center">Loading...</div>}
       {/* Table */}
-      <div className="relative overflow-x-auto mt-20">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                Employee Id
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                DOB
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Department
-              </th>
-              <th scope="col" className="px-6 py-3">
-                IsActive
-              </th>
-              <th scope="col" className="px-6 py-3">
-                EmploymentType
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Edit
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Delete
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {allEmployees.length > 0 ? (
-              allEmployees.map((employee) => (
-                <tr
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                  key={employee._id}
-                >
-                  <th
-                    scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+      {!loading && (
+        <div className="relative overflow-x-auto mt-20">
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" className="px-6 py-3">
+                  Employee Id
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Name
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  DOB
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Department
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  IsActive
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  EmploymentType
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Edit
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Delete
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {allEmployees.length > 0 ? (
+                allEmployees.map((employee) => (
+                  <tr
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                    key={employee._id}
                   >
-                    {employee.employeeid}
-                  </th>
-                  <td className="px-6 py-4">{employee.name}</td>
-                  <td className="px-6 py-4">{formatDate(employee.dob)}</td>
-                  <td className="px-6 py-4">{employee.department}</td>
-                  <td className="px-6 py-4">
-                    {employee.isactive ? "true" : "false"}
-                  </td>
-                  <td className="px-6 py-4">{employee.employementtype}</td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      {employee.employeeid}
+                    </th>
+                    <td className="px-6 py-4">{employee.name}</td>
+                    <td className="px-6 py-4">{formatDate(employee.dob)}</td>
+                    <td className="px-6 py-4">{employee.department}</td>
+                    <td className="px-6 py-4">
+                      {employee.isactive ? "true" : "false"}
+                    </td>
+                    <td className="px-6 py-4">{employee.employementtype}</td>
 
-                  <td className="px-6 py-4">
-                    <Link
-                      to={`/edit-employee/${employee._id}`}
-                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                    >
-                      Edit
-                    </Link>
-                  </td>
-                  <td className="px-6 py-4">
-                    <button
-                      onClick={() => {
-                        handleDelete(employee._id);
-                      }}
-                      className="font-medium text-red-600 dark:text-red-500 hover:underline"
-                    >
-                      Delete
-                    </button>
+                    <td className="px-6 py-4">
+                      <Link
+                        to={`/edit-employee/${employee._id}`}
+                        className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >
+                        Edit
+                      </Link>
+                    </td>
+                    <td className="px-6 py-4">
+                      <button
+                        onClick={() => {
+                          handleDelete(employee._id);
+                        }}
+                        className="font-medium text-red-600 dark:text-red-500 hover:underline"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="8" className="text-center">
+                    No employees found
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="8" className="text-center">
-                  No employees found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
     </>
   );
 };
