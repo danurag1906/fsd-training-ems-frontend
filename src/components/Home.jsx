@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const [allEmployees, setAllEmployees] = useState([]);
 
+  const [loading, setLoading] = useState(false);
+
   // Function to format the date to YYYY-MM-DD
   const formatDate = (isoString) => {
     if (!isoString) return "";
@@ -18,6 +20,7 @@ const Home = () => {
 
   const fetchAllEmployees = async () => {
     try {
+      setLoading(true);
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/api/employee/fetchAllEmployees`,
         {
@@ -36,6 +39,8 @@ const Home = () => {
       }
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -70,7 +75,8 @@ const Home = () => {
   return (
     <>
       <Navbar />
-
+      {loading && <div className="text-center">Loading...</div>}
+      {/* Table */}
       <div className="relative overflow-x-auto mt-20">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

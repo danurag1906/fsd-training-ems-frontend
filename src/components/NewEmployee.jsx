@@ -11,6 +11,8 @@ const NewEmployee = () => {
     employeeId: "",
   });
 
+  const [creating, setCreating] = useState(false);
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -24,6 +26,7 @@ const NewEmployee = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setCreating(true);
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/api/employee/createEmployee`,
         {
@@ -50,6 +53,8 @@ const NewEmployee = () => {
       }
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setCreating(false);
     }
   };
   return (
@@ -137,7 +142,7 @@ const NewEmployee = () => {
           type="submit"
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          Submit
+          {creating ? "Creating..." : "Create"}
         </button>
       </form>
     </>
