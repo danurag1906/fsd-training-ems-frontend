@@ -75,7 +75,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      {loading && <div className="text-center">Loading...</div>}
+      {loading && <div className="text-center mt-20">Loading...</div>}
       {/* Table */}
       {!loading && (
         <div className="relative overflow-x-auto mt-20">
